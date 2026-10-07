@@ -2,9 +2,8 @@
 
 required_packages <- c(
   here = "project-relative paths",
-  haven = "labelled PIRLS data and missing values",
+  EdSurvey = "PIRLS data import and complex-survey analysis",
   dplyr = "data preparation",
-  survey = "complex-survey estimation",
   broom = "tidy model output",
   ggplot2 = "figures"
 )

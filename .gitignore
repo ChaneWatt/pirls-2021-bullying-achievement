@@ -48,3 +48,23 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
+
+# Raw PIRLS data (not to be redistributed)
+data/raw/*.dta
+data/raw/*.sav
+data/raw/*.RData
+data/raw/*.Rdata
+
+# EdSurvey-generated local cache
+data/raw/*.txt
+data/raw/*.meta
+
+# LaTeX build artifacts (auto-generated on compile, not source files)
+paper/*.aux              # cross-reference/label data
+paper/*.log              # compile log
+paper/*.bbl              # generated bibliography
+paper/*.blg              # bibtex log
+paper/*.out              # hyperref bookmarks
+paper/*.fls              # file list from latexmk
+paper/*.fdb_latexmk      # latexmk build cache
+paper/*.synctex.gz       # editor-PDF sync data

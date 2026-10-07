@@ -1,75 +1,101 @@
-# Audit the PIRLS 2021 student files ---------------------------------------
+# Audit the PIRLS 2021 EdSurvey data ---------------------------------------
 
 source("scripts/00_packages.R")
+library(EdSurvey)
 
-student_files <- c(
-  Brazil = here::here("data", "raw", "ASGBRAR5.Rdata"),
-  `South Africa` = here::here("data", "raw", "ASGZAFR5.Rdata")
+# readPIRLS() requires the extracted SPSS files with their original filenames.
+# The first run creates EdSurvey .txt and .meta cache files in data/raw.
+pirls <- readPIRLS(
+  path = "data/raw",
+  countries = c("zaf", "bra")
 )
 
-required_variables <- c(
-  "IDSTUD", "IDSCHOOL", "IDCLASS",
-  "TOTWGT", "JKZONE", "JKREP",
-  sprintf("ASRREA%02d", 1:5),
-  "ASBGSB", "ASDGSB",
-  paste0("ASBG11", LETTERS[1:10])
+analysis_variables <- c(
+  "idstud",
+  "idschool",
+  "idclass",
+  "asbg01",  # gender
+  "asbghrl", # home resources for learning scale
+  "asdghrl", # home resources for learning index
+  "asbgsb",  # student bullying scale
+  "asdgsb",  # student bullying index
+  "rrea"     # expands to the five overall-reading plausible values
 )
 
-load_single_object <- function(path) {
-  if (!file.exists(path)) {
-    stop("File not found: ", path, call. = FALSE)
-  }
-
-  data_environment <- new.env(parent = emptyenv())
-  object_names <- load(path, envir = data_environment)
-
-  if (length(object_names) != 1L) {
-    stop(
-      basename(path), " must contain exactly one object; found ",
-      length(object_names), ".",
-      call. = FALSE
-    )
-  }
-
-  data_environment[[object_names]]
+extract_country_data <- function(country_data) {
+  getData(
+    data = country_data,
+    varnames = analysis_variables,
+    # Preserve the full sample for the audit. Omitted categories remain labelled
+    # and can be excluded explicitly for each later analysis.
+    dropOmittedLevels = FALSE,
+    addAttributes = TRUE
+  )
 }
 
-audit_student_file <- function(country, path) {
-  student_data <- load_single_object(path)
-  missing_variables <- setdiff(required_variables, names(student_data))
+analysis_data <- lapply(pirls$datalist, extract_country_data)
+names(analysis_data) <- pirls$covs$country
 
-  if (length(missing_variables) > 0L) {
+expected_columns <- c(
+  "idstud", "idschool", "idclass", "asbg01",
+  "asbghrl", "asdghrl", "asbgsb", "asdgsb",
+  sprintf("asrrea%02d", 1:5)
+)
+
+for (country in names(analysis_data)) {
+  missing_columns <- setdiff(expected_columns, names(analysis_data[[country]]))
+
+  if (length(missing_columns) > 0L) {
     stop(
-      country, " is missing required variable(s): ",
-      paste(missing_variables, collapse = ", "),
+      country, " is missing expected variable(s): ",
+      paste(missing_columns, collapse = ", "),
       call. = FALSE
     )
   }
-
-  cleaned_fields <- haven::zap_missing(student_data[required_variables])
-
-  data.frame(
-    country = country,
-    students = nrow(student_data),
-    unique_student_ids = dplyr::n_distinct(student_data$IDSTUD),
-    schools = dplyr::n_distinct(student_data$IDSCHOOL),
-    jackknife_zones = dplyr::n_distinct(cleaned_fields$JKZONE, na.rm = TRUE),
-    missing_weights = sum(is.na(cleaned_fields$TOTWGT)),
-    missing_bullying_index = sum(is.na(cleaned_fields$ASDGSB)),
-    missing_reading_pv1 = sum(is.na(cleaned_fields$ASRREA01)),
-    stringsAsFactors = FALSE
-  )
 }
 
 audit_results <- do.call(
   rbind,
-  Map(audit_student_file, names(student_files), unname(student_files))
+  lapply(names(analysis_data), function(country) {
+    country_data <- analysis_data[[country]]
+
+    data.frame(
+      country = country,
+      students = nrow(country_data),
+      unique_student_ids = dplyr::n_distinct(country_data$idstud),
+      schools = dplyr::n_distinct(country_data$idschool),
+      extracted_variables = ncol(country_data),
+      reading_plausible_values = sum(
+        grepl("^asrrea0[1-5]$", names(country_data))
+      ),
+      stringsAsFactors = FALSE
+    )
+  })
 )
 rownames(audit_results) <- NULL
 
+expected_counts <- data.frame(
+  country = c("South Africa", "Brazil"),
+  expected_students = c(12422L, 4941L),
+  expected_schools = c(321L, 187L),
+  stringsAsFactors = FALSE
+)
+
+count_check <- merge(audit_results, expected_counts, by = "country", sort = FALSE)
+
+if (nrow(count_check) != nrow(expected_counts) ||
+    any(count_check$students != count_check$expected_students) ||
+    any(count_check$schools != count_check$expected_schools)) {
+  stop("EdSurvey student or school counts do not match the expected files.", call. = FALSE)
+}
+
 if (any(audit_results$students != audit_results$unique_student_ids)) {
-  stop("At least one student file contains duplicate IDSTUD values.", call. = FALSE)
+  stop("At least one country contains duplicate IDSTUD values.", call. = FALSE)
+}
+
+if (any(audit_results$reading_plausible_values != 5L)) {
+  stop("EdSurvey did not return all five overall-reading plausible values.", call. = FALSE)
 }
 
 print(audit_results, row.names = FALSE)
-message("Data audit completed successfully.")
+message("EdSurvey data audit completed successfully.")
