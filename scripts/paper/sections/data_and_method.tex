@@ -1,0 +1,111 @@
+\section{Data and Methodology}
+
+We use the PIRLS 2021 public-use data for South Africa and Brazil. Rather than importing the R data files manually and reconstructing the complex survey design, we import the official SPSS files using the R package \texttt{EdSurvey}. This package is specifically designed for large-scale education assessments such as PIRLS and automatically recognises the study's sampling weights, jackknife replicate weights, plausible values, and relationships between student and school records.
+
+\subsection{Why EdSurvey Was Selected}
+
+PIRLS does not use a simple random sample. Schools are sampled first, after which classes and students are sampled within schools. Consequently, students have unequal probabilities of selection, while students attending the same school are not statistically independent.
+
+\texttt{EdSurvey} retains the survey-design information required to account for:
+
+\begin{itemize}
+    \item the student sampling weight, \texttt{TOTWGT};
+    \item stratification and clustering in the PIRLS sample;
+    \item the 196 jackknife replicates for Brazil;
+    \item the 250 jackknife replicates for South Africa; and
+    \item uncertainty associated with the five reading plausible values.
+\end{itemize}
+
+Accounting for these features prevents the use of ordinary standard errors, which would generally be underestimated because they do not reflect the complex PIRLS sampling design.
+
+\subsection{Data Loading}
+
+The two countries are imported in R as follows:
+
+\begin{verbatim}
+pirls <- readPIRLS(
+  path = "data/raw",
+  countries = c("zaf", "bra")
+)
+\end{verbatim}
+
+This produces separate \texttt{EdSurvey} data objects for South Africa and Brazil. The package processes the official PIRLS files and performs the required student--school linking when variables are requested.
+
+\subsection{Variables Prepared}
+
+The \texttt{getData()} function is used to inspect and prepare the variables presented in Table~\ref{tab:pirls_variables}.
+
+\begin{table}[htbp]
+    \centering
+    \caption{PIRLS variables used in the analysis}
+    \label{tab:pirls_variables}
+    \begin{tabular}{ll}
+        \toprule
+        \textbf{Concept} & \textbf{PIRLS variable(s)} \\
+        \midrule
+        Student identifier      & \texttt{IDSTUD} \\
+        School identifier       & \texttt{IDSCHOOL} \\
+        Class identifier        & \texttt{IDCLASS} \\
+        Gender                  & \texttt{ASBG01} \\
+        Home-resources scale    & \texttt{ASBGHRL} \\
+        Home-resources category & \texttt{ASDGHRL} \\
+        Bullying scale          & \texttt{ASBGSB} \\
+        Bullying category       & \texttt{ASDGSB} \\
+        Reading achievement     & \texttt{ASRREA01}--\texttt{ASRREA05} \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+The variable \texttt{ASBGSB} is a Rasch-scaled measure for which higher values represent less frequent bullying. The categorical variable \texttt{ASDGSB} groups students into ``About Weekly,'' ``About Monthly,'' and ``Almost Never'' categories.
+
+\subsection{Use of Reading Plausible Values}
+
+PIRLS administers only part of the complete reading assessment to each student. Reading achievement is therefore treated as a latent quantity rather than as a conventional observed test score.
+
+PIRLS supplies five plausible values:
+
+\begin{center}
+\texttt{ASRREA01}, \texttt{ASRREA02}, \texttt{ASRREA03},
+\texttt{ASRREA04}, and \texttt{ASRREA05}.
+\end{center}
+
+The regression analysis must be estimated across all five plausible values. The resulting estimates are then combined so that their standard errors incorporate:
+
+\begin{enumerate}
+    \item sampling uncertainty arising from observing a sample of students; and
+    \item imputation uncertainty arising from the estimation of latent reading achievement.
+\end{enumerate}
+
+Using only \texttt{ASRREA01} would ignore part of the imputation uncertainty and would therefore understate the uncertainty surrounding the estimates.
+
+\subsection{Validation Results}
+
+The revised data audit produced the sample counts shown in Table~\ref{tab:sample_counts}.
+
+\begin{table}[htbp]
+    \centering
+    \caption{Validated PIRLS sample sizes}
+    \label{tab:sample_counts}
+    \begin{tabular}{lrr}
+        \toprule
+        \textbf{Country} & \textbf{Students} & \textbf{Schools} \\
+        \midrule
+        South Africa & 12,422 & 321 \\
+        Brazil       & 4,941  & 187 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+Every student identifier is unique, and \texttt{EdSurvey} returns all five reading plausible values for both countries.
+
+\subsection{Treatment of Missing Data}
+
+For the initial data audit, omitted PIRLS response categories are retained so that the full sample can be validated. This prevents the sample from being reduced silently when information on gender, bullying, or home resources is missing.
+
+Missing observations will subsequently be excluded explicitly for each regression specification. This approach makes changes in the analytical sample size transparent.
+
+\subsection{Distinction Between Data Extraction and Estimation}
+
+The \texttt{getData()} function produces an ordinary R data frame that is suitable for checking variables, recoding, and descriptive inspection. It should not be used as a replacement survey design for final statistical inference.
+
+Final weighted tables and regressions will therefore be estimated using the original \texttt{EdSurvey} objects and functions such as \texttt{edsurveyTable()} and \texttt{lm.sdf()}. This preserves the PIRLS sampling weights, plausible-value calculations, and jackknife standard errors.
