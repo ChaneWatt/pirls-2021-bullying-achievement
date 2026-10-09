@@ -125,19 +125,14 @@ INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmmi
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmsy10.tfm
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmsy8.tfm
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmsy6.tfm
+INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\helvetic\phvr7t.tfm
+INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\helvetic\phvb7t.tfm
 INPUT .\sections\introduction.tex
 INPUT .\sections\introduction.tex
 INPUT sections\introduction.tex
-INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\helvetic\phvr7t.tfm
-INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\helvetic\phvb7t.tfm
 INPUT .\sections\literature_review.tex
 INPUT .\sections\literature_review.tex
 INPUT sections\literature_review.tex
-INPUT .\sections\data_and_method.tex
-INPUT .\sections\data_and_method.tex
-INPUT sections\data_and_method.tex
-INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmtt10.tfm
-INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\helvetic\phvb7t.tfm
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\ts1phv.fd
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\ts1phv.fd
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\ts1phv.fd
@@ -152,9 +147,14 @@ INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\helvetic\
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\helvetic\phvb8r.tfm
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\helvetic\phvr7t.vf
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\helvetic\phvr8r.tfm
+INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\helvetic\phvr8c.vf
+INPUT .\sections\data_and_method.tex
+INPUT .\sections\data_and_method.tex
+INPUT sections\data_and_method.tex
+INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmtt10.tfm
+INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\helvetic\phvb7t.tfm
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\helvetic\phvb7t.vf
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\helvetic\phvb8r.tfm
-INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\helvetic\phvr8c.vf
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmmi10.tfm
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmsy10.tfm
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\helvetic\phvb7t.tfm
