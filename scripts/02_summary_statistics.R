@@ -324,3 +324,4 @@ message(
   output_directory,
   "."
 )
+view(design_check_table)

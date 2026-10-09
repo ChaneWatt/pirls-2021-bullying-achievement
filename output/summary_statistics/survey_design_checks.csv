@@ -1,0 +1,3 @@
+"country","students","unique_student_ids","schools","reading_plausible_values","full_sample_weight","jackknife_replicates"
+"South Africa",12422,12422,321,5,"TOTWGT",250
+"Brazil",4941,4941,187,5,"TOTWGT",196
