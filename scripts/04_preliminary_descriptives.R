@@ -17,7 +17,9 @@ library(ggplot2)
 output_dir <- here::here("output", "preliminary_descriptives")
 dir.create(output_dir, recursive = TRUE, showWarnings = FALSE)
 
+message("Loading South African PIRLS data...")
 zaf <- load_pirls_country("zaf")
+message("Loading Brazilian PIRLS data...")
 bra <- load_pirls_country("bra")
 
 country_data <- list(
@@ -48,8 +50,29 @@ student_n <- function(sdf) {
 }
 
 extract_table <- function(result, country, analysis) {
-  result_data <- if (is.list(result) && "data" %in% names(result)) result$data else result
-  result_data <- as.data.frame(result_data, stringsAsFactors = FALSE)
+  # EdSurvey objects such as summary2 and edsurveyTable store their printable
+  # table in $data, but their S3 class may prevent as.data.frame() dispatch.
+  # Remove the outer S3 class before extracting that component.
+  result_data <- NULL
+
+  if (inherits(result, "summary2") || inherits(result, "edsurveyTable")) {
+    result_data <- unclass(result)[["data"]]
+  } else if (is.list(result) && "data" %in% names(result)) {
+    result_data <- result[["data"]]
+  } else if (is.data.frame(result) || is.matrix(result)) {
+    result_data <- result
+  }
+
+  if (is.null(result_data)) {
+    stop("The result does not contain an exportable data table.")
+  }
+
+  # Strip any inherited EdSurvey class from the inner table as well.
+  if (!is.data.frame(result_data)) {
+    result_data <- as.data.frame(unclass(result_data), stringsAsFactors = FALSE)
+  } else {
+    result_data <- as.data.frame(result_data, stringsAsFactors = FALSE)
+  }
   result_data <- normalise_output_names(result_data)
   result_data$country <- country
   result_data$analysis <- analysis
@@ -58,7 +81,27 @@ extract_table <- function(result, country, analysis) {
 
 save_analysis <- function(result, country, analysis, stem) {
   saveRDS(result, file.path(output_dir, paste0(stem, "_", gsub(" ", "_", tolower(country)), ".rds")))
-  table_data <- extract_table(result, country, analysis)
+  table_data <- tryCatch(
+    extract_table(result, country, analysis),
+    error = function(error) {
+      text_path <- file.path(
+        output_dir,
+        paste0(stem, "_", gsub(" ", "_", tolower(country)), ".txt")
+      )
+      writeLines(capture.output(print(result)), text_path)
+      warning(
+        "Could not convert ", stem, " for ", country,
+        " to CSV; its printed output was saved to ", text_path,
+        ". Reason: ", conditionMessage(error)
+      )
+      data.frame()
+    }
+  )
+
+  if (nrow(table_data) == 0L) {
+    return(table_data)
+  }
+
   write.csv(
     table_data,
     file.path(output_dir, paste0(stem, "_", gsub(" ", "_", tolower(country)), ".csv")),
@@ -94,6 +137,7 @@ all_ses_gradient <- list()
 
 for (country in names(country_data)) {
   sdf <- country_data[[country]]
+  message("Running weighted summaries for ", country, "...")
 
   # Weighted distributions and overall reading achievement.
   summary_variables <- c("asdgsb", "asbgsb", "rrea", "asbg01", "asdghrl", "asbghrl")
@@ -102,6 +146,7 @@ for (country in names(country_data)) {
   }
 
   for (variable in summary_variables) {
+    message("  Summary: ", variable)
     key <- paste(country, variable, sep = "__")
     all_summaries[[key]] <- run_summary(
       sdf = sdf,
@@ -113,6 +158,7 @@ for (country in names(country_data)) {
 
   # Percentages and achievement means are produced together. Since all five
   # reading PVs are present, PCT describes the weighted bullying distribution.
+  message("  Reading achievement by bullying category (full jackknife calculation)...")
   all_headline[[country]] <- run_table(
     sdf = sdf,
     formula = rrea ~ asdgsb,
@@ -123,6 +169,7 @@ for (country in names(country_data)) {
   )
 
   # Within-gender and within-SES percentages plus achievement gradients.
+  message("  Bullying gradient by gender (full jackknife calculation)...")
   all_gender_gradient[[country]] <- run_table(
     sdf = sdf,
     formula = rrea ~ asbg01 + asdgsb,
@@ -132,6 +179,7 @@ for (country in names(country_data)) {
     aggregation_level = 1L
   )
 
+  message("  Bullying gradient by home resources (full jackknife calculation)...")
   all_ses_gradient[[country]] <- run_table(
     sdf = sdf,
     formula = rrea ~ asdghrl + asdgsb,
@@ -153,16 +201,18 @@ write.csv(ses_gradient_table, file.path(output_dir, "table_bullying_by_home_reso
 # Missingness and omitted-response audit. This is deliberately unweighted:
 # it reports how many sampled records would be lost before any model is fitted.
 candidate_missingness_variables <- c(
-  "asdgsb", "asbgsb", "asbg01", "asdage", "asbghrl", "asdghrl",
+  "asdgsb", "asbgsb", "asbg01", "asdage", "asbhses", "asdhses",
+  "asbghrl", "asdghrl",
   "asdhedup", "asbg03", "acbg05b", "acbg05c", "acbg03a", "acbg03b"
 )
 
 missingness_one <- function(sdf, country, requested) {
   actual <- find_column(sdf, requested)
+  full_sample_n <- student_n(sdf)
   if (is.na(actual)) {
     return(data.frame(
       country = country, variable = toupper(requested), available = FALSE,
-      total_n = student_n(sdf), valid_n = NA_integer_, omitted_or_missing_n = NA_integer_,
+      total_n = full_sample_n, valid_n = NA_integer_, omitted_or_missing_n = NA_integer_,
       omitted_or_missing_pct = NA_real_, stringsAsFactors = FALSE
     ))
   }
@@ -181,23 +231,22 @@ missingness_one <- function(sdf, country, requested) {
   if (inherits(cleaned, "error")) {
     return(data.frame(
       country = country, variable = toupper(requested), available = TRUE,
-      total_n = student_n(sdf), valid_n = NA_integer_, omitted_or_missing_n = NA_integer_,
+      total_n = full_sample_n, valid_n = NA_integer_, omitted_or_missing_n = NA_integer_,
       omitted_or_missing_pct = NA_real_, stringsAsFactors = FALSE
     ))
   }
 
   clean_name <- names(cleaned)[tolower(names(cleaned)) == tolower(actual)][1L]
   valid_n <- sum(!is.na(cleaned[[clean_name]]))
-  total_n <- nrow(cleaned)
 
   data.frame(
     country = country,
     variable = toupper(requested),
     available = TRUE,
-    total_n = total_n,
+    total_n = full_sample_n,
     valid_n = valid_n,
-    omitted_or_missing_n = total_n - valid_n,
-    omitted_or_missing_pct = round(100 * (total_n - valid_n) / total_n, 2),
+    omitted_or_missing_n = full_sample_n - valid_n,
+    omitted_or_missing_pct = round(100 * (full_sample_n - valid_n) / full_sample_n, 2),
     stringsAsFactors = FALSE
   )
 }

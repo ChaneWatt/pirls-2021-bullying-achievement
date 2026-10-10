@@ -1,0 +1,5 @@
+Estimates are weighted using the weight variable 'totwgt'
+  Variable    N Weighted N     Min. 1st Qu.   Median     Mean  3rd Qu.     Max.
+1     rrea 4941    2866475 12.86389 338.774 436.9968 418.8765 508.8552 782.7933
+        SD NA's Zero weights
+1 122.5966    0            0

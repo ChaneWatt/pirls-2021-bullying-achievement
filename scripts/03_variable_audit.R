@@ -18,7 +18,9 @@ library(dplyr)
 output_dir <- here::here("output", "variable_audit")
 dir.create(output_dir, recursive = TRUE, showWarnings = FALSE)
 
+message("Loading South African PIRLS data...")
 zaf <- load_pirls_country("zaf")
+message("Loading Brazilian PIRLS data...")
 bra <- load_pirls_country("bra")
 
 country_data <- list(
@@ -70,6 +72,23 @@ search_one <- function(sdf, country, concept, pattern) {
   )
 
   result <- flatten_for_csv(result)
+
+  # searchSDF legitimately returns a zero-row data frame when a concept has no
+  # matching variable. Preserve that finding as one explicit audit row instead
+  # of trying to append metadata to an empty table.
+  if (nrow(result) == 0L) {
+    return(data.frame(
+      country = country,
+      concept = concept,
+      search_pattern = pattern,
+      variableName = NA_character_,
+      Labels = NA_character_,
+      fileFormat = NA_character_,
+      search_note = "No codebook match",
+      stringsAsFactors = FALSE
+    ))
+  }
+
   result$country <- country
   result$concept <- concept
   result$search_pattern <- pattern
@@ -80,6 +99,7 @@ search_results <- list()
 search_index <- 1L
 
 for (country in names(country_data)) {
+  message("Searching the codebook for ", country, "...")
   for (concept in names(search_terms)) {
     search_results[[search_index]] <- search_one(
       sdf = country_data[[country]],
@@ -268,6 +288,7 @@ audit_results <- list()
 audit_index <- 1L
 
 for (country in names(country_data)) {
+  message("Auditing candidate variables for ", country, "...")
   for (row_index in seq_len(nrow(candidate_registry))) {
     row <- candidate_registry[row_index, ]
     audit_results[[audit_index]] <- audit_one(

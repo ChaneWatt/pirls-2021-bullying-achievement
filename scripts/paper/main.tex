@@ -2,6 +2,7 @@
 \usepackage[margin=2.5cm]{geometry}
 \usepackage{booktabs}
 \usepackage{graphicx}
+\usepackage{placeins}
 \usepackage{natbib}
 \usepackage{hyperref}
 \usepackage{setspace}
@@ -34,6 +35,16 @@ Possible hypotheses:
 \input{sections/results.tex}
 
 \input{sections/conclusion.tex}
+
+\clearpage
+\appendix
+\section{Sensitivity and robustness analyses}
+
+\input{../../output/regressions/common_sample_models.tex}
+\FloatBarrier
+
+\input{../../output/regressions/robustness_model.tex}
+\FloatBarrier
 
 \bibliographystyle{apalike}
 \bibliography{references}

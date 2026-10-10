@@ -3,6 +3,7 @@
 
 source("scripts/03_variable_audit.R")
 source("scripts/04_preliminary_descriptives.R")
+source("scripts/05_create_readable_tables.R")
 
 message("Steps 3-5 finished. No regression models were run.")
 

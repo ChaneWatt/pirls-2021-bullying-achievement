@@ -1,0 +1,5 @@
+Estimates are weighted using the weight variable 'totwgt'
+  Variable    N Weighted N    Min. 1st Qu.  Median     Mean  3rd Qu.     Max.
+1   asbgsb 4715    2703169 3.16486 8.33331 9.59197 9.839686 12.56749 12.56749
+        SD NA's Zero weights
+1 2.163192    0            0

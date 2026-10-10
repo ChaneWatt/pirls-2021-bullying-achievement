@@ -1,0 +1,5 @@
+Estimates are weighted using the weight variable 'totwgt'
+         asdghrl    N Weighted N Weighted Percent Weighted Percent SE
+1 MANY RESOURCES   89   16562.83         2.644637           0.5385301
+2 SOME RESOURCES 4596  450570.34        71.943956           1.0928322
+3  FEW RESOURCES 1722  159146.47        25.411407           1.0489221

@@ -1,0 +1,4 @@
+Estimates are weighted using the weight variable 'totwgt'
+  asbg01    N Weighted N Weighted Percent Weighted Percent SE
+1   GIRL 6081   546024.8         49.45614           0.6171863
+2    BOY 6154   558034.0         50.54386           0.6171863

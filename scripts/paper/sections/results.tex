@@ -1,1 +1,26 @@
 \section{Results}
+
+Table~\ref{tab:bullying-main-models} presents the M1–M5 estimates for South Africa and Brazil. There is a negative relationship for both Brazil and South Africa between reading scores and bullying penalties. South Africa in Model 1 that just controls for Bullying Penalty indicates a decrease of 55.1 points in reading scores if the learner is bullied on a monthly basis and a decrease of 116.6 points if bullied on a weekly basis. Brazil displays the same negative pattern: learners bullied monthly score 36.4 points lower, while those bullied weekly score 123.5 points lower. All four M1 bullying coefficients are statistically significant at the 1\% level.
+
+The model develops in interesting directions as controls are added in M2, M3, M4 and M5. In South Africa, the estimated bullying penalties become progressively smaller as controls are added, with the M5 coefficients indicating a 36.1-point decrease for monthly bullying and an 80.6-point decrease for weekly bullying. Brazil, by contrast, remains comparatively stable: the monthly penalty increases in magnitude from 36.4 points in M1 to 38.4 points in M5, while the weekly penalty decreases from 123.5 to 113.3 points. The standard errors generally decrease as controls are introduced, indicating greater precision. The explained variance increases from 13.4\% to 38.0\% in South Africa and from 13.9\% to 35.5\% in Brazil.
+
+\input{../../output/regressions/main_models.tex}
+\FloatBarrier
+
+Figure~\ref{fig:bullying-coefficients} summarizes the bullying coefficients across M1–M5, showing how the estimated associations change as successive controls are introduced.
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=\textwidth]{../../output/regressions/figures/bullying_coefficients_across_models.pdf}
+\caption{Estimated association between bullying frequency and reading achievement across model specifications}
+\label{fig:bullying-coefficients}
+\end{figure}
+\FloatBarrier
+
+Re-estimating M1–M4 on the common M5 sample produced a similar pattern of coefficients, suggesting that the changes across models were not primarily attributable to sample composition (Appendix Table~\ref{tab:bullying-common-sample}). The continuous-scale specification also produced results consistent with the main analysis (Appendix Table~\ref{tab:bullying-robustness}).
+
+Table~\ref{tab:bullying-interactions} presents the interactions between bullying and gender (I1) and between bullying and home SES (I2). The gender interactions are not statistically significant in either South Africa or Brazil. There is therefore no evidence that the association between bullying and reading achievement differs between boys and girls.
+
+The SES interaction produces a different pattern. In South Africa, each one-unit increase in home SES makes the estimated monthly bullying penalty 13.2 points more negative and the weekly penalty 20.3 points more negative. In Brazil, the corresponding interaction coefficients are positive: 3.2 points for monthly bullying and 9.0 points for weekly bullying. The monthly interaction is not statistically significant, whereas the weekly interaction is significant at the 5\% level. Thus, there is evidence that higher SES intensifies the bullying penalty in South Africa, while the Brazilian estimates provide limited evidence that higher SES moderates the weekly bullying penalty.
+
+\input{../../output/regressions/interaction_models.tex}
+\FloatBarrier

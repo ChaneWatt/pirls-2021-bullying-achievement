@@ -1,0 +1,5 @@
+Estimates are weighted using the weight variable 'totwgt'
+  Variable     N Weighted N Min. 1st Qu. Median     Mean 3rd Qu.  Max.
+1   asdage 12363    1114004 6.58    9.75  10.08 10.24993   10.58 14.58
+         SD NA's Zero weights
+1 0.7514606    0            0

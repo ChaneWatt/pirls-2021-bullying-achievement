@@ -1,0 +1,18 @@
+pirls_variable,readable_name,plain_english_description
+RREA,reading_achievement,Reading achievement calculated using all five plausible values
+ASDGSB,bullying_frequency,Bullying frequency category
+ASBGSB,bullying_scale_score,Continuous Students Bullied at School scale
+ASBG01,gender,Learner gender
+ASDAGE,student_age,Learner age
+ASBHSES,home_socioeconomic_status,Continuous Home Socioeconomic Status scale
+ASDHSES,home_socioeconomic_status_category,Home Socioeconomic Status category
+ASBGHRL,home_resources_scale,Continuous Home Resources for Learning scale
+ASDGHRL,home_resources_category,Home Resources for Learning category
+ASDHEDUP,highest_parental_education,Highest educational level of either parent
+ASBG03,home_language,Frequency of speaking the language of the PIRLS test at home
+ACBG05B,school_location,Location of the school
+ACBG05C,neighbourhood_income,Income level of the school's immediate area
+ACBG03A,share_economically_disadvantaged,Percentage of learners from economically disadvantaged homes
+ACBG03B,share_economically_affluent,Percentage of learners from economically affluent homes
+TOTWGT,student_survey_weight,PIRLS full-sample student weight
+

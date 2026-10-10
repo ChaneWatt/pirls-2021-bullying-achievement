@@ -1,0 +1,5 @@
+Estimates are weighted using the weight variable 'totwgt'
+         asdgsb    N Weighted N Weighted Percent Weighted Percent SE
+1  ALMOST NEVER 2680   278155.9         26.60605           1.1151957
+2 ABOUT MONTHLY 3880   333431.7         31.89327           0.7496785
+3  ABOUT WEEKLY 5100   433873.4         41.50068           1.1811095

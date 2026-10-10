@@ -1,0 +1,29 @@
+"country","variable","available","total_n","valid_student_count","missing_or_omitted_count","missing_or_omitted_percent"
+"South Africa","Bullying frequency",TRUE,12422,11660,762,6.13
+"South Africa","Bullying scale score",TRUE,12422,11660,762,6.13
+"South Africa","Gender",TRUE,12422,12235,187,1.51
+"South Africa","Student age",TRUE,12422,12363,59,0.47
+"South Africa","Home socioeconomic status",TRUE,12422,9692,2730,21.98
+"South Africa","Home socioeconomic status category",TRUE,12422,9692,2730,21.98
+"South Africa","Home resources scale",TRUE,12422,6407,6015,48.42
+"South Africa","Home resources category",TRUE,12422,6407,6015,48.42
+"South Africa","Highest parental education",TRUE,12422,5194,7228,58.19
+"South Africa","Home language",TRUE,12422,11202,1220,9.82
+"South Africa","School location",TRUE,12422,10571,1851,14.9
+"South Africa","Neighbourhood income",FALSE,12422,,,
+"South Africa","Share economically disadvantaged",TRUE,12422,11187,1235,9.94
+"South Africa","Share economically affluent",TRUE,12422,9884,2538,20.43
+"Brazil","Bullying frequency",TRUE,4941,4715,226,4.57
+"Brazil","Bullying scale score",TRUE,4941,4715,226,4.57
+"Brazil","Gender",TRUE,4941,4888,53,1.07
+"Brazil","Student age",TRUE,4941,4918,23,0.47
+"Brazil","Home socioeconomic status",TRUE,4941,4289,652,13.2
+"Brazil","Home socioeconomic status category",TRUE,4941,4289,652,13.2
+"Brazil","Home resources scale",TRUE,4941,3626,1315,26.61
+"Brazil","Home resources category",TRUE,4941,3626,1315,26.61
+"Brazil","Highest parental education",TRUE,4941,3280,1661,33.62
+"Brazil","Home language",TRUE,4941,4736,205,4.15
+"Brazil","School location",TRUE,4941,4677,264,5.34
+"Brazil","Neighbourhood income",FALSE,4941,,,
+"Brazil","Share economically disadvantaged",TRUE,4941,4628,313,6.33
+"Brazil","Share economically affluent",TRUE,4941,4176,765,15.48
