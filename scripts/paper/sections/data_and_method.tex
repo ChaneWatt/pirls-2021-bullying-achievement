@@ -1,111 +1,162 @@
 \section{Data and Methodology}
 
-We use the PIRLS 2021 public-use data for South Africa and Brazil. Rather than importing the R data files manually and reconstructing the complex survey design, we import the official SPSS files using the R package \texttt{EdSurvey}. This package is specifically designed for large-scale education assessments such as PIRLS and automatically recognises the study's sampling weights, jackknife replicate weights, plausible values, and relationships between student and school records.
+\subsection{Data Source and Country Samples}
 
-\subsection{Why EdSurvey Was Selected}
+This essay uses data from the 2021 Progress in International Reading
+Literacy Study (PIRLS), which assesses the reading achievement of Grade~4
+learners. PIRLS is conducted every five years by the International
+Association for the Evaluation of Educational Achievement (IEA) and is
+widely recognised as an international benchmark of reading achievement
+and development. The first PIRLS cycle was conducted in 2001, meaning
+that PIRLS~2021 provides twenty years of reading-trend data for learners
+at a pivotal stage of schooling, when they are expected to transition
+from learning to read towards reading to learn
+\citep{mullis2023pirls}. This study compares Brazil and South Africa as
+two upper-middle-income countries with similar levels of GDP per capita
+\citep{spaull2023pirls}. The dataset is publicly available from the
+IEA website. The statistical analysis was conducted in \texttt{R} using
+reproducible scripts and the \texttt{EdSurvey} package.
 
-PIRLS does not use a simple random sample. Schools are sampled first, after which classes and students are sampled within schools. Consequently, students have unequal probabilities of selection, while students attending the same school are not statistically independent.
+\subsection{Variables and Measurement}
 
-\texttt{EdSurvey} retains the survey-design information required to account for:
+The outcome variable for this study is reading achievement, measured using
+all five plausible values (\texttt{ASRREA01}--\texttt{ASRREA05}).
+Plausible values are multiple draws from each learner's estimated
+achievement distribution and are intended to produce unbiased
+population-level estimates rather than precise individual scores.
+Estimates are calculated across all five plausible values and combined
+to incorporate uncertainty in the measurement of reading achievement.
+The main explanatory variable is the bullying-frequency category
+(\texttt{ASDGSB}), which classifies learners as experiencing bullying
+``About Weekly,'' ``About Monthly,'' or ``Never or Almost Never.''
+The continuous bullying scale (\texttt{ASBGSB}) is used as an alternative
+specification of the main explanatory variable. Higher scores indicate
+less frequent bullying.
 
-\begin{itemize}
-    \item the student sampling weight, \texttt{TOTWGT};
-    \item stratification and clustering in the PIRLS sample;
-    \item the 196 jackknife replicates for Brazil;
-    \item the 250 jackknife replicates for South Africa; and
-    \item uncertainty associated with the five reading plausible values.
-\end{itemize}
-
-Accounting for these features prevents the use of ordinary standard errors, which would generally be underestimated because they do not reflect the complex PIRLS sampling design.
-
-\subsection{Data Loading}
-
-The two countries are imported in R as follows:
-
-\begin{verbatim}
-pirls <- readPIRLS(
-  path = "data/raw",
-  countries = c("zaf", "bra")
-)
-\end{verbatim}
-
-This produces separate \texttt{EdSurvey} data objects for South Africa and Brazil. The package processes the official PIRLS files and performs the required student--school linking when variables are requested.
-
-\subsection{Variables Prepared}
-
-The \texttt{getData()} function is used to inspect and prepare the variables presented in Table~\ref{tab:pirls_variables}.
+Table~\ref{tab:pirls_variables} reports the variables used in the final analysis. Variables considered during the preliminary audit but not included in the reported models are omitted from the table.
 
 \begin{table}[htbp]
     \centering
-    \caption{PIRLS variables used in the analysis}
+    \small
+    \caption{PIRLS 2021 variables used in the analysis}
     \label{tab:pirls_variables}
-    \begin{tabular}{ll}
+    \begin{tabular}{p{3.1cm}p{3.0cm}p{8.0cm}}
         \toprule
-        \textbf{Concept} & \textbf{PIRLS variable(s)} \\
+        \textbf{Concept} & \textbf{PIRLS variable(s)} & \textbf{Measurement or use} \\
         \midrule
-        Student identifier      & \texttt{IDSTUD} \\
-        School identifier       & \texttt{IDSCHOOL} \\
-        Class identifier        & \texttt{IDCLASS} \\
-        Gender                  & \texttt{ASBG01} \\
-        Home-resources scale    & \texttt{ASBGHRL} \\
-        Home-resources category & \texttt{ASDGHRL} \\
-        Bullying scale          & \texttt{ASBGSB} \\
-        Bullying category       & \texttt{ASDGSB} \\
-        Reading achievement     & \texttt{ASRREA01}--\texttt{ASRREA05} \\
+        Student identifier & \texttt{IDSTUD} & Unique student identifier used for validation and linkage \\
+        School identifier & \texttt{IDSCHOOL} & Identifies students attending the same sampled school \\
+        Class identifier & \texttt{IDCLASS} & Identifies students attending the same sampled class \\
+        Reading achievement & \texttt{ASRREA01}--\texttt{ASRREA05} & Five plausible values for overall reading achievement \\
+        Bullying frequency & \texttt{ASDGSB} & Never or almost never, about monthly, or about weekly; main explanatory variable \\
+        Student bullying scale & \texttt{ASBGSB} & Continuous scale used for robustness; higher values indicate less frequent bullying \\
+        Gender & \texttt{ASBG01} & Student-reported gender; girls are the reference category \\
+        Age & \texttt{ASDAGE} & Student age in years \\
+        Home socioeconomic status & \texttt{ASBHSES} & Continuous PIRLS home-SES scale; higher values indicate higher socioeconomic status \\
+        Home language & \texttt{ASBG03} & Frequency with which the language of the assessment is spoken at home \\
+        School location & \texttt{ACBG05B} & Urban, suburban, town, village, or remote-rural location \\
+        School economic composition & \texttt{ACBG03A} & Principal-reported percentage of economically disadvantaged students \\
+        Student sampling weight & \texttt{TOTWGT} & Produces population-representative estimates \\
+        Replication variables & \texttt{JKZONE}, \texttt{JKREP} & Define the jackknife repeated-replication variance design \\
         \bottomrule
     \end{tabular}
 \end{table}
 
-The variable \texttt{ASBGSB} is a Rasch-scaled measure for which higher values represent less frequent bullying. The categorical variable \texttt{ASDGSB} groups students into ``About Weekly,'' ``About Monthly,'' and ``Almost Never'' categories.
 
-\subsection{Use of Reading Plausible Values}
+\subsection{Empirical Strategy and Specifications}
 
-PIRLS administers only part of the complete reading assessment to each student. Reading achievement is therefore treated as a latent quantity rather than as a conventional observed test score.
+Five models were estimated using progressively larger sets of controls.
+Model~1 (\textbf{M1}) estimates the unadjusted association between
+bullying frequency and reading achievement. Model~2 (\textbf{M2}) adds
+controls for gender and age. Model~3 (\textbf{M3}) additionally controls
+for home socioeconomic status (SES), while Model~4 (\textbf{M4}) adds
+home language. Finally, Model~5 (\textbf{M5}) includes all the preceding
+variables as well as school location and school disadvantage.
 
-PIRLS supplies five plausible values:
+The control variables were introduced in theoretically motivated blocks.
+Gender was included because previous research indicates that bullying
+exposure differs between boys and girls
+\citep{juan2025risk,anton_erxleben2016bullying,sbrogliorizzotto2021bullying}.
+Age was included because older learners and learners who have repeated a
+grade may differ in both their risk of victimisation and academic
+achievement \citep{juan2025risk}. Home resources were added as a measure
+of socioeconomic background, which is strongly associated with
+educational achievement and may also be related to bullying exposure
+\citep{sbrogliorizzotto2021bullying}. Home language was included because
+alignment between the language spoken at home, the language of
+instruction and the assessment language may influence reading performance
+and may also capture relevant cultural or minority-group differences.
+Finally, school location and school disadvantage were included to account
+for differences in school resources, socioeconomic composition and safety
+environments that may be associated with both bullying and achievement
+\citep{anton_erxleben2016bullying,juan2025risk}.
 
-\begin{center}
-\texttt{ASRREA01}, \texttt{ASRREA02}, \texttt{ASRREA03},
-\texttt{ASRREA04}, and \texttt{ASRREA05}.
-\end{center}
+ Because the complete-case requirements become more restrictive as controls are added, the analytical sample decreases in Models 3 and 5. As a robustness check, Models 1–4 were therefore re-estimated using the complete-case sample from Model 5. Holding the sample constant helps distinguish changes in the estimated bullying coefficients resulting from covariant adjustment from changes caused by differences in sample composition. This common-sample analysis does not eliminate possible selection bias arising from systematic missingness, but it makes comparisons across specifications more informative.
 
-The regression analysis must be estimated across all five plausible values. The resulting estimates are then combined so that their standard errors incorporate:
 
-\begin{enumerate}
-    \item sampling uncertainty arising from observing a sample of students; and
-    \item imputation uncertainty arising from the estimation of latent reading achievement.
-\end{enumerate}
+The models are estimated separately for South Africa and Brazil. For country $c$, plausible value $p$, and specification $m$, the estimating equation is
 
-Using only \texttt{ASRREA01} would ignore part of the imputation uncertainty and would therefore understate the uncertainty surrounding the estimates.
+\begin{equation}
+Y_{isc}^{(p)} = \alpha_{c}^{(m)}
++ \beta_{1c}^{(m)}\text{Monthly}_{isc}
++ \beta_{2c}^{(m)}\text{Weekly}_{isc}
++ \mathbf{X}_{isc,m}'\boldsymbol{\gamma}_{c}^{(m)}
++ \varepsilon_{isc}^{(p)},
+\qquad p=1,\ldots,5,
+\label{eq:achievement_model}
+\end{equation}
 
-\subsection{Validation Results}
+In Equation~\ref{eq:achievement_model}, \(Y_{isc}^{(p)}\) denotes reading
+plausible value \(p\) for learner \(i\) attending school \(s\) in country
+\(c\). The superscript \(m\) identifies the model specification, with
+\(m=1,\ldots,5\). The indicators \(\text{Monthly}_{isc}\) and
+\(\text{Weekly}_{isc}\) identify learners classified as experiencing
+bullying about monthly or about weekly, respectively, with learners who
+were never or almost never bullied forming the omitted reference group.
+The corresponding coefficients, \(\beta_{1c}^{(m)}\) and
+\(\beta_{2c}^{(m)}\), therefore measure conditional mean differences in
+PIRLS reading points relative to this reference group. The vector
+\(\mathbf{X}_{isc,m}\) contains the controls included in specification
+\(m\), while \(\boldsymbol{\gamma}_c^{(m)}\) contains their associated
+coefficients. Finally, \(\varepsilon_{isc}^{(p)}\) is the error term.
+The models are estimated separately for South Africa and Brazil and
+across all five plausible values.Two additional specifications interact bullying frequency with gender (I1) and home socioeconomic status (I2) to assess whether the bullying–achievement association differs across these groups.
 
-The revised data audit produced the sample counts shown in Table~\ref{tab:sample_counts}.
+\subsection{Survey Design and Estimation}
 
-\begin{table}[htbp]
-    \centering
-    \caption{Validated PIRLS sample sizes}
-    \label{tab:sample_counts}
-    \begin{tabular}{lrr}
-        \toprule
-        \textbf{Country} & \textbf{Students} & \textbf{Schools} \\
-        \midrule
-        South Africa & 12,422 & 321 \\
-        Brazil       & 4,941  & 187 \\
-        \bottomrule
-    \end{tabular}
-\end{table}
+All estimates incorporate the PIRLS total student sampling weight (TOTWGT), which accounts for unequal probabilities of selection and adjustments for nonresponse at the school, class and student levels. Sampling variances are estimated using the PIRLS jackknife repeated replication procedure and the supplied JKZONE and JKREP variables. This procedure accounts for the clustered and stratified survey design. The released data produce 250 replicate estimates for South Africa and 196 for Brazil. Reading-achievement estimates additionally incorporate uncertainty across the five plausible values. The analysis was implemented in R using the EdSurvey package.
 
-Every student identifier is unique, and \texttt{EdSurvey} returns all five reading plausible values for both countries.
+\subsection{Methodological Limitations}
 
-\subsection{Treatment of Missing Data}
+Several limitations should be considered. First, bullying exposure and
+reading achievement were measured during the same assessment period. The
+analysis therefore cannot determine which occurred first. Bullying may
+contribute to poorer achievement, but lower-achieving learners may also
+face a greater risk of victimisation. Unobserved family, peer and school
+characteristics may additionally influence both bullying and achievement
+\citep{anton_erxleben2016bullying}.
 
-For the initial data audit, omitted PIRLS response categories are retained so that the full sample can be validated. This prevents the sample from being reduced silently when information on gender, bullying, or home resources is missing.
+Second, bullying exposure is self-reported and may therefore be affected
+by recall error, differences in learners' interpretation of the questions
+and their willingness to report victimisation.
 
-Missing observations will subsequently be excluded explicitly for each regression specification. This approach makes changes in the analytical sample size transparent.
+Third, the common-sample analysis reduces the number of observations
+because all models are re-estimated using only learners with complete
+information for Model~5. This allows changes in the bullying coefficients
+to be compared without simultaneously changing the composition of the
+sample. However, excluding learners with missing information may introduce
+selection bias if missingness is related to bullying or reading
+achievement. The smaller sample may also result in less precise estimates.
 
-\subsection{Distinction Between Data Extraction and Estimation}
+Fourth, South African and Brazilian Grade~4 learners were assessed one
+year later than originally scheduled, during a period of widespread
+COVID-19-related educational disruption.
 
-The \texttt{getData()} function produces an ordinary R data frame that is suitable for checking variables, recoding, and descriptive inspection. It should not be used as a replacement survey design for final statistical inference.
-
-Final weighted tables and regressions will therefore be estimated using the original \texttt{EdSurvey} objects and functions such as \texttt{edsurveyTable()} and \texttt{lm.sdf()}. This preserves the PIRLS sampling weights, plausible-value calculations, and jackknife standard errors.
+Finally, Brazil and South Africa should not be treated as interchangeable
+simply because both are classified as upper-middle-income countries. They
+differ in their education systems, levels and patterns of inequality,
+linguistic environments, school conditions and social understandings of
+bullying. The estimated associations are therefore context-specific
+averages and may conceal substantial heterogeneity across learners and
+schools. Evidence from these two countries cannot be generalised to all
+upper-middle-income countries.
