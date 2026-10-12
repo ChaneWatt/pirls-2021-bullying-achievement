@@ -2,7 +2,7 @@
 
 % Keep result figures compact enough to share a page with their discussion.
 % Individual figures can still override these defaults when necessary.
-\setkeys{Gin}{width=0.78\linewidth,height=0.38\textheight,keepaspectratio}
+\setkeys{Gin}{width=0.74\linewidth,height=0.30\textheight,keepaspectratio}
 
 % Compact result tables so regression output does not consume a full page.
 % These settings are local to each table environment.
@@ -17,23 +17,13 @@
 \AddToHook{env/table*/begin}{\compactresulttable}
 \AddToHook{env/longtable/begin}{\compactresulttable}
 
-Descriptively, approximately 73–74\% of South African learners were classified as experiencing bullying about monthly or weekly, compared with approximately 42\% of Brazilian learners. The regression analysis below examines whether the association between bullying and reading achievement persists after progressively introducing student, household, and school-level controls.
-
-Table~\ref{tab:bullying-main-models} presents the M1–M5 estimates for South Africa and Brazil. There is a negative relationship for both Brazil and South Africa between reading scores and bullying penalties. South Africa in Model 1 that just controls for Bullying Penalty indicates a decrease of 55.1 points in reading scores if the learner is bullied on a monthly basis and a decrease of 116.6 points if bullied on a weekly basis. Brazil displays the same negative pattern: learners bullied monthly score 36.4 points lower, while those bullied weekly score 123.5 points lower. All four M1 bullying coefficients are statistically significant at the 1\% level.
+Table~\ref{tab:bullying-main-models} presents the M1–M5 estimates for South Africa and Brazil. The full set of control coefficients is reported in Appendix Table~\ref{tab:bullying-main-models-full}. South Africa in Model 1 that just controls for Bullying Penalty indicates a decrease of 55.1 points in reading scores if the learner is bullied on a monthly basis and a decrease of 116.6 points if bullied on a weekly basis. Brazil displays the same negative pattern: learners bullied monthly score 36.4 points lower, while those bullied weekly score 123.5 points lower. All four M1 bullying coefficients are statistically significant at the 1\% level.
 
 The model develops in interesting directions as controls are added in M2, M3, M4 and M5. In South Africa, the estimated bullying penalties become progressively smaller as controls are added, with the M5 coefficients indicating a 36.1-point decrease for monthly bullying and an 80.6-point decrease for weekly bullying. Brazil, by contrast, remains comparatively stable: the monthly penalty increases in magnitude from 36.4 points in M1 to 38.4 points in M5, while the weekly penalty decreases from 123.5 to 113.3 points. The standard errors generally decrease as controls are introduced, indicating greater precision. The explained variance increases from 13.4\% to 38.0\% in South Africa and from 13.9\% to 35.5\% in Brazil.
 
-\input{../../output/regressions/main_models.tex}
-\FloatBarrier
+\input{../../output/regressions/main_models_compact.tex}
 
-Figure~\ref{fig:bullying-coefficients} summarizes the bullying coefficients across M1–M5, showing how the estimated associations change as successive controls are introduced.
-\begin{figure}[!htbp]
-\centering
-\includegraphics[width=\textwidth]{../../output/regressions/figures/bullying_coefficients_across_models.pdf}
-\caption{Estimated association between bullying frequency and reading achievement across model specifications}
-\label{fig:bullying-coefficients}
-\end{figure}
-\FloatBarrier
+Appendix Figure~\ref{fig:bullying-coefficients} summarizes the bullying coefficients across M1–M5, showing how the estimated associations change as successive controls are introduced.
 
 Re-estimating M1–M4 on the common M5 sample produced a similar pattern of coefficients, suggesting that the changes across models were not primarily attributable to sample composition (Appendix Table~\ref{tab:bullying-common-sample}). The continuous-scale specification also produced results consistent with the main analysis (Appendix Table~\ref{tab:bullying-robustness}).
 

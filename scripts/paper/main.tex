@@ -1,18 +1,24 @@
-\documentclass[11pt]{article}
-\usepackage[margin=2.5cm]{geometry}
+\documentclass[11pt,a4paper]{article}
+\usepackage[a4paper,margin=2.5cm]{geometry}
 \usepackage{booktabs}
+\usepackage{array}
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{placeins}
+\usepackage{float}
 \usepackage{natbib}
 \usepackage{hyperref}
+\hypersetup{hidelinks}
 \usepackage{setspace}
 \usepackage{helvet}
 \usepackage{parskip}
 \renewcommand{\familydefault}{\sfdefault}
+\renewcommand{\thesection}{\arabic{section}.}
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
 
 
 \setstretch{1.15}
+\setlength{\parskip}{0.45em}
 
 \title{Bullying and Reading Achievement: A Comparison of South Africa and Brazil Using PIRLS 2021}
 \author{Chane Watt \\ Stellenbosch University}
@@ -21,13 +27,8 @@
 \begin{document}
 \maketitle
 
-\section{Abstract}
-What is the association between bullying exposure and reading achievement among Grade 4 students in South Africa, and how does this association compare with Brazil?
-Possible hypotheses:
-- Students experiencing more frequent bullying have lower reading achievement.
-- The association remains after accounting for demographic and socioeconomic differences.
-- The strength of the association may differ by gender or socioeconomic background.
-- The association may differ between South Africa and Brazil.
+\section*{Abstract}
+This essay investigates the association between bullying frequency and reading achievement among Grade~4 learners in South Africa and Brazil, whether some learners are more strongly affected, and whether the South African pattern appears in another unequal upper-middle-income country. This is relevant in South Africa, where high reported bullying exposure coexists with low foundational literacy. Reading literacy is central to skill development and learners’ future employment prospects. With the use of PIRLS 2021 data, survey-weighted linear regressions were estimated separately for both countries across five nested specifications that progressively control for learner, household and school characteristics. Furthermore, the interaction models examined differences by gender and home socioeconomic status. The results confirm the hypothesised negative association between bullying frequency and reading scores. In fully adjusted models, monthly bullying was associated with scores 36.1 points lower in South Africa and 38.4 points lower in Brazil than among learners categorised as ``Never or almost Never bullied''. Weekly bullying was associated with considerably larger gaps of 80.6 and 113.3 points, respectively. Adding controls reduced the estimated South African coefficients but produced little change in Brazil. Gender interactions were not statistically significant, whereas home SES interactions showed contrasting patterns. Higher SES intensified the monthly and weekly reading gaps associated with bullying in South Africa. In Brazil, the monthly interaction was insignificant, while higher SES reduced the weekly gap. Finally, common-sample and alternative-measure robustness checks produced similar findings in both countries. Despite the cross-sectional design limitation to permit causal conclusions, frequent bullying should be treated as an educational cause for concern.
 
 \input{sections/introduction.tex}
 
@@ -37,19 +38,15 @@ Possible hypotheses:
 
 \input{sections/results.tex}
 
+\input{sections/discussion.tex}
+
 \input{sections/conclusion.tex}
 
 \clearpage
-\appendix
-\section{Sensitivity and robustness analyses}
-
-\input{../../output/regressions/common_sample_models.tex}
-\FloatBarrier
-
-\input{../../output/regressions/robustness_model.tex}
-\FloatBarrier
-
 \bibliographystyle{apalike}
 \bibliography{references}
+
+\clearpage
+\input{sections/appendix.tex}
 
 \end{document}

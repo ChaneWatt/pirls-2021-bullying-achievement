@@ -1,6 +1,6 @@
 PWD C:\Users\Chane Watt\OneDrive - Stellenbosch University\Documents\Honours\Semester 2\Education Economics\Essay\pirls-2021-bullying-achievement\scripts\paper
 INPUT C:\Users\Chane Watt\AppData\Local\MiKTeX\miktex\data\le\pdftex\pdflatex.fmt
-INPUT c:\Users\Chane Watt\OneDrive - Stellenbosch University\Documents\Honours\Semester 2\Education Economics\Essay\pirls-2021-bullying-achievement\scripts\paper\main.tex
+INPUT main.tex
 OUTPUT main.log
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\tex\latex\base\article.cls
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\tex\latex\base\article.cls
@@ -21,6 +21,8 @@ INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\tex\latex\geometry\geome
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\tex\latex\geometry\geometry.cfg
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\tex\latex\booktabs\booktabs.sty
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\tex\latex\booktabs\booktabs.sty
+INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\tex\latex\tools\array.sty
+INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\tex\latex\tools\array.sty
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\tex\latex\amsmath\amsmath.sty
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\tex\latex\amsmath\amsmath.sty
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\tex\latex\amsmath\amsopn.sty
@@ -45,6 +47,8 @@ INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\tex\latex\graphics-def\p
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\tex\latex\graphics-def\pdftex.def
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\tex\latex\placeins\placeins.sty
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\tex\latex\placeins\placeins.sty
+INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\tex\latex\float\float.sty
+INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\tex\latex\float\float.sty
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\tex\latex\natbib\natbib.sty
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\tex\latex\natbib\natbib.sty
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\tex\latex\hyperref\hyperref.sty
@@ -147,9 +151,6 @@ INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\helvetic
 INPUT .\sections\introduction.tex
 INPUT .\sections\introduction.tex
 INPUT sections\introduction.tex
-INPUT .\sections\literature_review.tex
-INPUT .\sections\literature_review.tex
-INPUT sections\literature_review.tex
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\helvetic\phvr7t.vf
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\helvetic\phvr8r.tfm
 INPUT C:\Users\Chane Watt\AppData\Local\MiKTeX\fonts\map\pdftex\pdftex.map
@@ -160,9 +161,9 @@ INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\helvetic\
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\helvetic\phvb8r.tfm
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\helvetic\phvr7t.vf
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\helvetic\phvr8r.tfm
-INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\helvetic\phvb7t.tfm
-INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\helvetic\phvb7t.vf
-INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\helvetic\phvb8r.tfm
+INPUT .\sections\literature_review.tex
+INPUT .\sections\literature_review.tex
+INPUT sections\literature_review.tex
 INPUT .\sections\data_and_method.tex
 INPUT .\sections\data_and_method.tex
 INPUT sections\data_and_method.tex
@@ -171,14 +172,14 @@ INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmtt
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\helvetic\phvb7t.vf
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\helvetic\phvb8r.tfm
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\helvetic\phvr7t.tfm
-INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\cmextra\cmex7.tfm
+INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmr9.tfm
+INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmmi9.tfm
+INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmsy9.tfm
+INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\cmextra\cmex9.tfm
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\cmextra\cmex7.tfm
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\helvetic\phvb7t.tfm
-INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmtt10.tfm
-INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\helvetic\phvb7t.vf
-INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\helvetic\phvb8r.tfm
-INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\helvetic\phvr7t.vf
-INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\helvetic\phvr8r.tfm
+INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmtt9.tfm
+INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\helvetic\phvb7t.tfm
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmmi10.tfm
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmsy10.tfm
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmex10.tfm
@@ -193,31 +194,27 @@ INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfont
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbsy10.tfm
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\cmextra\cmbsy8.tfm
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\cmextra\cmbsy6.tfm
+INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\helvetic\phvb7t.vf
+INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\helvetic\phvb8r.tfm
+INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\helvetic\phvr7t.vf
+INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\helvetic\phvr8r.tfm
+INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\helvetic\phvb7t.vf
+INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\helvetic\phvb8r.tfm
 INPUT .\sections\results.tex
 INPUT .\sections\results.tex
 INPUT sections\results.tex
-INPUT ..\..\output\regressions\main_models.tex
-INPUT ..\..\output\regressions\main_models.tex
-INPUT ..\..\output\regressions\main_models.tex
-INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\helvetic\phvr7t.tfm
+INPUT ..\..\output\regressions\main_models_compact.tex
+INPUT ..\..\output\regressions\main_models_compact.tex
+INPUT ..\..\output\regressions\main_models_compact.tex
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbx5.tfm
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\helvetic\phvro7t.tfm
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\omlphv.fd
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\omlphv.fd
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\omlphv.fd
-INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmmi9.tfm
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\helvetic\phvr7t.vf
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\helvetic\phvr8r.tfm
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\helvetic\phvro7t.vf
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\helvetic\phvro8r.tfm
-INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\helvetic\phvr7t.vf
-INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\helvetic\phvr8r.tfm
-INPUT ..\..\output\regressions\figures\bullying_coefficients_across_models.pdf
-INPUT ..\..\output\regressions\figures\bullying_coefficients_across_models.pdf
-INPUT ..\..\output\regressions\figures\bullying_coefficients_across_models.pdf
-INPUT ..\..\output\regressions\figures\bullying_coefficients_across_models.pdf
-INPUT ..\..\output\regressions\figures\bullying_coefficients_across_models.pdf
-INPUT ..\..\output\regressions\figures\bullying_coefficients_across_models.pdf
 INPUT ..\..\output\regressions\interaction_models.tex
 INPUT ..\..\output\regressions\interaction_models.tex
 INPUT ..\..\output\regressions\interaction_models.tex
@@ -225,22 +222,37 @@ INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\ts1phv.
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\ts1phv.fd
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\ts1phv.fd
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\helvetic\phvr8c.tfm
+INPUT .\sections\discussion.tex
+INPUT .\sections\discussion.tex
+INPUT sections\discussion.tex
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\helvetic\phvr8c.vf
 INPUT .\sections\conclusion.tex
 INPUT .\sections\conclusion.tex
 INPUT sections\conclusion.tex
-INPUT ..\..\output\regressions\common_sample_models.tex
-INPUT ..\..\output\regressions\common_sample_models.tex
-INPUT ..\..\output\regressions\common_sample_models.tex
-INPUT ..\..\output\regressions\robustness_model.tex
-INPUT ..\..\output\regressions\robustness_model.tex
-INPUT ..\..\output\regressions\robustness_model.tex
 INPUT .\main.bbl
 INPUT .\main.bbl
 INPUT main.bbl
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\helvetic\phvro7t.tfm
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\helvetic\phvro7t.vf
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\helvetic\phvro8r.tfm
+INPUT .\sections\appendix.tex
+INPUT .\sections\appendix.tex
+INPUT sections\appendix.tex
+INPUT ..\..\output\regressions\main_models.tex
+INPUT ..\..\output\regressions\main_models.tex
+INPUT ..\..\output\regressions\main_models.tex
+INPUT ..\..\output\regressions\common_sample_models.tex
+INPUT ..\..\output\regressions\common_sample_models.tex
+INPUT ..\..\output\regressions\common_sample_models.tex
+INPUT ..\..\output\regressions\robustness_model.tex
+INPUT ..\..\output\regressions\robustness_model.tex
+INPUT ..\..\output\regressions\robustness_model.tex
+INPUT ..\..\output\regressions\figures\bullying_coefficients_across_models.pdf
+INPUT ..\..\output\regressions\figures\bullying_coefficients_across_models.pdf
+INPUT ..\..\output\regressions\figures\bullying_coefficients_across_models.pdf
+INPUT ..\..\output\regressions\figures\bullying_coefficients_across_models.pdf
+INPUT ..\..\output\regressions\figures\bullying_coefficients_across_models.pdf
+INPUT ..\..\output\regressions\figures\bullying_coefficients_across_models.pdf
 INPUT main.aux
 INPUT .\main.out
 INPUT .\main.out
@@ -264,6 +276,8 @@ INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfo
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy8.pfb
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmtt10.pfb
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmtt10.pfb
+INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmtt9.pfb
+INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmtt9.pfb
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\type1\urw\helvetic\uhvb8a.pfb
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\type1\urw\helvetic\uhvb8a.pfb
 INPUT C:\Users\Chane Watt\AppData\Local\Programs\MiKTeX\fonts\type1\urw\helvetic\uhvr8a.pfb
